@@ -7,6 +7,7 @@ class UI {
         this.postSubmit = document.querySelector('.post-submit');
         this.forState = 'add';
     }
+    // show all posts
     showPosts(posts){
         let output = '';
 
@@ -29,7 +30,7 @@ class UI {
 
         this.post.innerHTML = output;
     }
-
+    // show alert message
     showAlert(message, className){
         this.clearAlert();
 
@@ -51,7 +52,7 @@ class UI {
             this.clearAlert();
         }, 3000);
     }
-
+    // clear alert message
     clearAlert(){
         const currentAlert = document.querySelector('.alert');
 
@@ -59,10 +60,56 @@ class UI {
             currentAlert.remove();
         }
     }
-
+    // clear all fields in form
     clearFields(){
         this.titleInput.value = '';
         this.bodyInput.value = '';
+    }
+    // Fill form to edit
+    fillForm(data){
+        this.titleInput.value = data.title;
+        this.bodyInput.value = data.body;
+        this.idInput.value = data.id;
+
+        this.changeFormState('edit');
+    }
+
+    // clear the hidden value
+    clearIdInput(){
+        this.idInput.value = '';
+    }
+
+    // change the form state
+    changeFormState(type){
+        if(type === 'edit'){
+            this.postSubmit.textContent = 'Update Post';
+            this.postSubmit.className = 'post-submit btn btn-warning btn-block';
+            
+            // Create cancel button
+            const button = document.createElement('button');
+            button.className = 'post-cancel btn btn-light btn-block';
+            button.appendChild(document.createTextNode('Cancel Edit'));
+
+            // Get parent
+            const cardForm = document.querySelector('.card-form');
+            // Get element insert before
+            const formEnd = document.querySelector('.form-end');
+            // Insert cancel button
+            cardForm.insertBefore(button, formEnd);
+
+        } else {
+            this.postSubmit.textContent = 'Post It';
+            this.postSubmit.className = 'post-submit btn btn-primary';
+
+            // remove cancel button if is there
+            if(document.querySelector('.post-cancel')){
+                document.querySelector('.post-cancel').remove();
+            }
+            // clear ID from hidden field
+            this.clearInput();
+            // clear text
+            this.clearFields();
+        }
     }
 }
 
