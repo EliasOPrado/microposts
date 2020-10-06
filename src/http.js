@@ -59,3 +59,5 @@ async put(url, data) {
          return resData;
         };
 }
+
+export const http = new EasyHTTP();
