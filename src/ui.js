@@ -1,6 +1,6 @@
 class UI {
     constructor(){
-        this.post = document.querySelector('#post');
+        this.post = document.querySelector('#posts');
         this.titleInput = document.querySelector('#title');
         this.bodyInput = document.querySelector('#body');
         this.idInput = document.querySelector('#id');
